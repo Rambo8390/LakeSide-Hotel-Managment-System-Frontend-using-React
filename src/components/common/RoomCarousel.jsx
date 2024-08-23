@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getAllRooms } from "../utils/ApiFunctions"
 import { Link } from "react-router-dom"
-import { Card, Carousel, Col, Container, Row } from "react-bootstrap"
+import { Card, Carousel, Col, Container, Row ,Button } from "react-bootstrap"
 
 const RoomCarousel = () => {
 	const [rooms, setRooms] = useState([{ id: "", roomType: "", roomPrice: "", photo: "" }])
@@ -30,10 +30,6 @@ const RoomCarousel = () => {
 
 	return (
 		<section className="bg-light mb-5 mt-5 shadow">
-			<Link to={"/browse-all-rooms"} className="hote-color text-center">
-				Browse all rooms
-			</Link>
-
 			<Container>
 				<Carousel indicators={false}>
 					{[...Array(Math.ceil(rooms.length / 4))].map((_, index) => (
@@ -54,7 +50,7 @@ const RoomCarousel = () => {
 											<Card.Body>
 												<Card.Title className="hotel-color">{room.roomType}</Card.Title>
 												<Card.Title className="room-price">${room.roomPrice}/night</Card.Title>
-												<div className="flex-shrink-0">
+												<div className="d-flex flex-shrink-0 flex-row-reverse">
 													<Link to={`/book-room/${room.id}`} className="btn btn-hotel btn-sm">
 														Book Now
 													</Link>
@@ -68,6 +64,23 @@ const RoomCarousel = () => {
 					))}
 				</Carousel>
 			</Container>
+			<div className="position-relative" style={{ bottom: '12px', left: '12px' }}>
+			<Button
+    			variant="primary"
+    			as={Link}
+    			to="/browse-all-rooms"
+    			style={{
+      			textDecoration: 'none',  // Remove underline
+      			color: 'rgb(169, 77, 123)', // Base color
+      			borderColor: 'rgb(169, 77, 123)', // Button border color
+				background:'white'
+    			}}
+    			className="text-center"
+  			>
+    		Browse all rooms
+  			</Button>
+			
+			  </div>
 		</section>
 	)
 }
